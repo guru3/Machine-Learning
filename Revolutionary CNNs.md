@@ -27,3 +27,5 @@
     - Introduced “skip connections”
     - Very deep : 152 layers network
     - Beats human-level performance on IMAGENET dataset
+
+What are ways to get better performance on a neural networks ? We can try changing neural networks structure, iterate over it to find a better network that suits our needs. But what are other ways to improve your accuracy ? One way is to use ensemble methods i.e. train may networks independently, predict output on each of them, and then return the average of those outputs. What other way ? We can use different parts of images as input and use the average of those outputs - one of the ways is 10-crop i.e. run 10 different sub-images on the network and average the output. However, these methods are not practically useful in real-time applications or let's say the tradeoff between computational/time resources isn't worth the accuracy improvement these provide in such cases.
