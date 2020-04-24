@@ -14,7 +14,8 @@ class GradientDescent:
 		X = np.c_[ np.ones((m,1)), x ] #add bias
 		n = X.shape[1] #total features
 		theta = np.random.randn( n, 1 ) #weights initialized
-		y = np.array( [ [y_i] for y_i in y ] )
+		if type( y[0] ) == int:
+			y = np.array( [ [y_i] for y_i in y ] )
 		cost_history = np.zeros(iterations)
 		theta_history = np.zeros( (iterations, n) )
 
@@ -24,18 +25,21 @@ class GradientDescent:
 		prediction = np.dot(x,theta)
 		return x.T.dot((prediction - y))
 
+	def predict(self, x, theta):
+		x_b = np.c_[ np.ones((x.shape[0],1)), x ]
+		return x_b.dot(theta)
+
 	def gradient_descent(self, x, y, learning_rate=0.01, iterations=100 ):
 		X,y,m,n,theta,cost_history,theta_history = self.__initialize(x,y,iterations)
 		
 		for it in range(iterations):
-			prediction = np.dot(X,theta)
 			theta = theta -(1/m)*learning_rate*self.__gradient(X,y,theta)
 			theta_history[it,:] =theta.T
 			cost_history[it]  = self.cal_cost(theta,X,y)
 		
 		return theta, cost_history, theta_history
 			
-	def stocashtic_gradient_descent(self, x, y, learning_rate=0.01, iterations=10 ):
+	def stochastic_gradient_descent(self, x, y, learning_rate=0.01, iterations=10 ):
 		X,y,m,n,theta,cost_history,theta_history = self.__initialize(x,y,iterations)
 
 		for it in range(iterations):
