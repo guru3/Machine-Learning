@@ -4,6 +4,7 @@ Different techniques and optimizations in the world of ML
 In case github doesn't loads the jupyter notebook, use online notebook viewer.<br>
 For example : https://nbviewer.jupyter.org/github/guru3/Machine-Learning/blob/master/Linear%20Regression.ipynb
 
+( from Francois Chollet's book ) 
 ### The universal machine-learning workflow
 
 1. Define the problem: What data is available, and what are you trying to predict? Will you need to collect more data or hire people to manually label a dataset? 
@@ -13,3 +14,13 @@ For example : https://nbviewer.jupyter.org/github/guru3/Machine-Learning/blob/ma
 5. Develop a first model that beats a trivial common-sense baseline, *thus demonstrating that machine learning can work on your problem*. This may not always be the case!
 6. Gradually refine your model architecture by tuning hyperparameters and adding regularization. Make changes based on performance on the validation data only, not the test data or the training data. Remember that you should get your model to overfit (thus identifying a model capacity level that’s greater than you need) and only then begin to add regularization or downsize your model.
 7. Be  aware  of  validation-set  overfitting  when  turning  hyperparameters:  the  fact that your hyperparameters may end up being over specialized to the validation set. Avoiding this is the purpose of having a separate test set!
+
+#### Here’s  a  quick  overview  of  the  mappingbetween input modalities and appropriate network architectures
+- Vector data — Densely connected network (Dense layers)
+- Image data — 2D convnets
+- Sound data (for example, waveform) — Either 1D convnets (preferred) or RNNs
+- Text data — Either 1D convnets (preferred) or RNNs
+- Timeseries data — Either RNNs (preferred) or 1D convnets.
+- Other  types  of  sequence  data — Either RNNs  or  1D  convnets. Prefer  RNNs  if  data ordering is strongly meaningful (for example, for timeseries, but not for text). *what about bidirectional RNNs*
+- Video  data — Either 3D  convnets  (if  you  need  to  capture  motion  effects)  or  a combination  of  a  frame-level  2D  convnet  for  feature  extraction  followed  by either an RNN or a 1D convnet to process the resulting sequences
+- Volumetric data — 3D convnets.
